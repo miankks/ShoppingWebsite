@@ -1,4 +1,5 @@
-﻿var itemCount = 0;
+﻿(function () {
+var itemCount = 0;
 
 $(".add").click(function (){
     itemCount ++;
@@ -10,5 +11,4 @@ $(".clear").click(function() {
     $("#itemCount").html("").css("display", "none");
     $("#cartItems").html("");
 }); 
-//(function () {
-//})();
+})();

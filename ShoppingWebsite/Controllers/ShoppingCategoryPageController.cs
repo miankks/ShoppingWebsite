@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -40,8 +41,15 @@ namespace ShoppingWebsite.Controllers
         public ActionResult Index(string dropdowntipo, int? price, string sizes)
         {
             string all = dropdowntipo +" " +" "+ sizes +" has been recieved";
-            HttpCookie data = new HttpCookie(sizes, dropdowntipo);
-            return Content(all);
+            HttpCookie cookie =
+                new HttpCookie("Cookie")
+                {
+                    Value = "Hello Cookie! CreatedOn: amount ordered: <b>" +dropdowntipo +"</b> and size: <b>" + sizes +"</b> " + DateTime.Now.ToShortTimeString(),
+                    Expires = DateTime.Now.AddDays(90),
+                    Name = "ShoppingCart",
+                };
+            this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+            return Content(cookie.Value);
         }
 
         //[HttpPost]

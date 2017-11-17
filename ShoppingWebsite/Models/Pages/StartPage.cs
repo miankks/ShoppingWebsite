@@ -16,7 +16,7 @@ namespace ShoppingWebsite.Models.Pages
     [SiteImageUrl]
     [AvailableContentTypes(
         Availability.Specific,
-        Include = new[] { typeof(ContainerPage), typeof(StandardPage), typeof(ISearchPage), typeof(LandingPage), typeof(ContentFolder), typeof(ShoppingCategoryPage) }, // Pages we can create under the start page...
+        Include = new[] { typeof(ContainerPage), typeof(StandardPage), typeof(ISearchPage), typeof(LandingPage), typeof(ContentFolder), typeof(ShoppingCategoryPage),typeof(ShoppingCartPage) }, // Pages we can create under the start page...
         ExcludeOn = new[] { typeof(ContainerPage), typeof(StandardPage), typeof(ISearchPage), typeof(LandingPage) })] // ...and underneath those we can't create additional start pages
     public class StartPage : SitePageData
     {

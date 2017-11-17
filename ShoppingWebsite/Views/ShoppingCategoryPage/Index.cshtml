@@ -13,16 +13,16 @@
 <div class="row">
     @foreach (var item in Model.ShoppingCategoryPages)
     {
-        <div class="span2 ">
+        <div class="span4" >
             <h2><a href="@item.LinkURL">@item.Name</a> </h2>
             @if (item.MainProductImage != null)
             {
-                <a href="@item.LinkURL"> <img src="@Url.ContentUrl(item.MainProductImage)" alt="Image" /> </a>
+                <a href="@item.LinkURL"> <img src="@Url.ContentUrl(item.MainProductImage)" alt="Image" width="10" height="300" /> </a>
             }
             else
             {
                 <a href="@item.LinkURL">
-                    <img src="~/Static/img/nopreviewavailable.png" />
+                    <img src="~/Static/img/nopreviewavailable.png" height="300"/>
                 </a>
             }
             <hr />
@@ -43,12 +43,12 @@
                     <hr />
                     @if (item.ProductImage != null)
                     {
-                        <a href="@item.LinkURL"><img src="@Url.ContentUrl(item.ProductImage)" /></a>
+                        <a href="@item.LinkURL"><img src="@Url.ContentUrl(item.ProductImage)" width="10" height="300"/></a>
                     }
                     else
                     {
                         <a href="@item.LinkURL">
-                            <img src="~/Static/img/nopreviewavailable.png" />
+                            <img src="~/Static/img/nopreviewavailable.png" height="300"/>
                         </a>
                     }
                     <h3>Pris:  @item.ProductPriceFor</h3>
