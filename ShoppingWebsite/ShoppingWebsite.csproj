@@ -391,7 +391,7 @@
     <Content Include="Static\img\TommyHilfiger3795.jpg" />
     <Content Include="Static\js\bootstrap.js" />
     <Content Include="Static\js\jquery.js" />
-    <Content Include="Static\js\scripts.js" />
+    <Content Include="Static\js\script.js" />
     <Content Include="Static\jwplayer\jwplayer.js" />
     <Content Include="Static\jwplayer\player.swf" />
     <Content Include="Static\jwplayer\preview.jpg" />

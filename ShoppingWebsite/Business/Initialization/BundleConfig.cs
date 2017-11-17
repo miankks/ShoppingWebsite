@@ -20,8 +20,8 @@ namespace ShoppingWebsite.Business.Initialization
         {
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                         "~/Static/js/jquery.js", //jquery.js can be removed and linked from CDN instead, we use a local one for demo purposes without internet connectionzz
-                        "~/Static/js/bootstrap.js")
-                        .Include("~/Static/js/scripts.js"));
+                        "~/Static/js/bootstrap.js",
+                        "~/Static/js/script.js"));
 
             bundles.Add(new StyleBundle("~/bundles/css")
                 .Include("~/Static/css/bootstrap.css", new CssRewriteUrlTransform())

@@ -20,9 +20,9 @@
 
     @if (Model != null)
     {
-        @*<form method="post" action=".">*@
-        using (Html.BeginForm("Cart", "ShoppingCategoryPage", FormMethod.Post))
-        {
+        <form method="post" action=".">
+        @*using (Html.BeginForm("Index", "ShoppingCategoryPage", FormMethod.Post))
+        {*@
 
             <div class="media span4">
                 <div class="mediaImg">
@@ -32,7 +32,12 @@
                     }
                     else
                     {
-                        <img src="~/Static/img/nopreviewavailable.png" alt="no Image available"/>
+                        <img id="myImg" src="~/Static/img/nopreviewavailable.png" alt="no Image available"/>
+                        <div id="myModal" class="modal">
+                            <span class="close">&times;</span>
+                            <img class="modal-content" id="img01">
+                            <div id="caption"></div>
+                        </div>
                     }
                     @*<h3 @Html.EditAttributes(x => x.CurrentPage.ProductName)>@Html.PropertyFor(x => x.CurrentPage.ProductName)</h3>*@
                     <h3 @Html.EditAttributes(x => x.CurrentPage.ProductPriceFor)>Pris: @Html.PropertyFor(x => x.CurrentPage.ProductPriceFor) kr</h3>
@@ -77,8 +82,8 @@
 
                 <input type="submit" class="btn btn-primary add" value="Läg till">
             </div>
-         }
-        @*</form>*@
+        //}
+        </form>
     }
 </div>
                 @*<div class="col-xs-12 col-sm-6">
@@ -92,15 +97,14 @@
 <script>
     var itemCount = 0;
 
-$(".add").click(function (){
-    itemCount ++;
-    $("#itemCount").html(itemCount).css("display", "block");
-}); 
+    $(".add").click(function () {
+        itemCount++;
+        $("#itemCount").html(itemCount).css("display", "block");
+    });
 
-$(".clear").click(function() {
-    itemCount = 0;
-    $("#itemCount").html("").css("display", "none");
-    $("#cartItems").html("");
-}); 
-
+    $(".clear").click(function () {
+        itemCount = 0;
+        $("#itemCount").html("").css("display", "none");
+        $("#cartItems").html("");
+    });
 </script>

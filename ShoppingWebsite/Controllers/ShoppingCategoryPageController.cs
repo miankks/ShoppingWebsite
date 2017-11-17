@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using EPiServer;
 using EPiServer.Core;
@@ -35,34 +36,19 @@ namespace ShoppingWebsite.Controllers
             return View(model);
         }
 
-        public ActionResult ContinueShopping()
-        {
-            return Content("Hello");
-        }
-
         [HttpPost]
-        public ActionResult Cart(string dropdowntipo, int? price, string sizes)
+        public ActionResult Index(string dropdowntipo, int? price, string sizes)
         {
             string all = dropdowntipo +" " +" "+ sizes +" has been recieved";
-            //var categoryPages = _contentRepository.GetChildren<ShoppingCategoryPage>(currentPage.ContentLink).ToList();
-
-            //var model = new ShoppingCategoryPageViewModel(currentPage)
-            //{
-            //    ShoppingCategoryPages = categoryPages
-            //};
-
-            //var shoppingLinks = _contentRepository.GetChildren<ShoppingPage>(currentPage.ContentLink).ToList();
-            //model.ShoppingPages = shoppingLinks;
-
-
-            return RedirectToAction("ContinueShopping");
+            HttpCookie data = new HttpCookie(sizes, dropdowntipo);
+            return Content(all);
         }
 
-        [HttpPost]
-        public ActionResult Index(string hello)
-        {
-            string a = hello;
-            return Content(a);
-        }
+        //[HttpPost]
+        //public ActionResult Index(string hello)
+        //{
+        //    string a = hello;
+        //    return Content(a);
+        //}
     }
 }
