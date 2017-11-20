@@ -1,14 +1,11 @@
-﻿
-@model ShoppingWebsite.Models.ViewModels.ShoppingCartViewModel
-    
+﻿@model ShoppingWebsite.Models.ViewModels.ShoppingCartViewModel
+
 <div>
     This is cart
 </div>
 <div>
-    @foreach (var item in Model.ShoppingCartPages)
+    @foreach (var item in Model.ProductIdsInCookie)
     {
-        
-        <h1>@item.Size</h1>
-        <h1>@item.NumberOfItems</h1>
+        <h1>@item</h1>
     }
 </div>

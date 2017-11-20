@@ -7,61 +7,64 @@ using EPiServer;
 using EPiServer.Core;
 using EPiServer.Framework.DataAnnotations;
 using EPiServer.Web.Mvc;
+using EPiServer.Web.PageExtensions;
 using ShoppingWebsite.Models.Pages;
 using ShoppingWebsite.Models.ViewModels;
 
 namespace ShoppingWebsite.Controllers
 {
-    public class ShoppingCartPageController : PageControllerBase<ShoppingCartPage>
+    public class ShoppingCartPageController : PageController<ShoppingCartPage>
     {
       
-        private readonly IContentRepository _contentRepository;
+        //private readonly IContentRepository _contentRepository;
 
-        public ShoppingCartPageController(IContentRepository contentRepository)
-        {
-            this._contentRepository = contentRepository;
-        }
+        //public ShoppingCartPageController(IContentRepository contentRepository)
+        //{
+        //    this._contentRepository = contentRepository;
+        //}
         public ActionResult Index(ShoppingCartPage currentPage)
         {
-            //var categoryPages = _contentRepository.GetChildren<ShoppingCartPage>(currentPage.ContentLink).ToList();
-            //var model = new ShoppingCartViewModel(currentPage)
-            //{
-            //    ShoppingCartPages = categoryPages
-            //};
+            var vm = new ShoppingCartViewModel(currentPage);
+
             var cart = new ShoppingCartPage();
-            var shop = new ShoppingCartViewModel(currentPage);
             HttpCookie cookies = Request.Cookies["ShoppingCart"];
+
             if (cookies != null)
             {
                 cart.Size = cookies["SIZE"];
                 cart.NumberOfItems = cookies["Itemsquantity"];
-                Response.Write(cart.Size + "  " + cart.NumberOfItems);
-                return View(shop);
+
+                vm.ProductIdsInCookie = new List<string>();
+                vm.ProductIdsInCookie.Add(cart.NumberOfItems);
+                vm.ProductIdsInCookie.Add(cart.Size);
+
+                //Response.Write(cart.Size + "  " + cart.NumberOfItems);
+                //return Content(cart.Size, cart.NumberOfItems);
             }
-            else
-            {
-                Response.Write("not found   ");
-                return Content("Not recieved");
-            }
+
+            return View(vm);
         }
 
         [HttpPost]
-        public void Index(string dropdowntipo, int? price, string sizes, string userId)
+        public ActionResult Index(ShoppingCartPage currentPage, string numberOfItems, int? price, string sizes, string userId, string desc)
         {
-         
+            var vm = new ShoppingCartViewModel(currentPage);
+
             HttpCookie cookie = new HttpCookie("ShoppingCart")
             {
-                Value = "Hello Cookie! CreatedOn: amount ordered:    " + dropdowntipo + " and size:   " +
-                        sizes + "        " + DateTime.Now.ToShortTimeString(),
+                //Value = "Hello Cookie! CreatedOn: amount ordered:    " + numberOfItems + " and size:   " +
+                //        sizes + "        " + DateTime.Now.ToShortTimeString(),
                 Expires = DateTime.Now.AddDays(30),
                 ["SIZE"] = sizes,
-                ["Itemsquantity"] = dropdowntipo,
+                ["Itemsquantity"] = numberOfItems,
             };
 
-
             this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
-            Response.Redirect("Index");
-            //return Content(cookie.Value);
+
+            vm.ProductIdsInCookie = new List<string>();
+            vm.ProductIdsInCookie.Add(numberOfItems);
+
+            return View(vm);
         }
     }
 }

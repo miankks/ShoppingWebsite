@@ -11,9 +11,25 @@ namespace ShoppingWebsite.Models.ViewModels
         public ShoppingCartViewModel(SitePageData currentPage)
             :base(currentPage)
         {
-            this.ShoppingCartPages = new List<ShoppingCartPage>();
+            this.ProductIdsInCookie = new List<string>();
+            this.ShoppingPagesInCart = new List<CartItem>();
         }
 
-        public List<ShoppingCartPage> ShoppingCartPages { get; set; }
+        public List<string> ProductIdsInCookie { get; set; }
+
+        public List<CartItem> ShoppingPagesInCart { get; set; }
+
+        public class CartItem
+        {
+            public ShoppingPage ShoppingPage { get; set; }
+
+            public int NumberOfItems { get; set; }
+
+            public double CartItemTotal { get; set; }
+
+            public string Size { get; set; }
+        }
+
+        public double CartTotal { get; set; }
     }
 }

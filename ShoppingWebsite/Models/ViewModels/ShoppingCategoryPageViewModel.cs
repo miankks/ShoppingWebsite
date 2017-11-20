@@ -20,6 +20,6 @@ namespace ShoppingWebsite.Models.ViewModels
         public List<ShoppingPage> ShoppingPages { get; set; }
         public List<ShoppingCategoryPage> ShoppingCategoryPages { get; set; }
 
-      
+        public string CartUrl { get; set; }
     }
 }

@@ -20,6 +20,8 @@ namespace ShoppingWebsite.Models.ViewModels
         public MvcHtmlString LogOutUrl { get; set; }
         public MvcHtmlString SearchActionUrl { get; set; }
 
+        public MvcHtmlString CartUrl { get; set; }
+
         public bool IsInReadonlyMode {get;set;}
     }
 }

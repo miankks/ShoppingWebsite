@@ -39,6 +39,14 @@ namespace ShoppingWebsite.Business
 
             var startPage = _contentLoader.Get<StartPage>(startPageContentLink);
 
+            var cartPages = _contentLoader.GetChildren<ShoppingCartPage>(ContentReference.StartPage).ToList();
+            string cartUrl = string.Empty;
+
+            if (cartPages.Any())
+            {
+                cartUrl = _urlResolver.GetUrl(cartPages.First().ContentLink);
+            }
+
             return new LayoutModel
                 {
                     Logotype = startPage.SiteLogotype,
@@ -49,6 +57,7 @@ namespace ShoppingWebsite.Business
                     CustomerZonePages = startPage.CustomerZonePageLinks,
                     LoggedIn = requestContext.HttpContext.User.Identity.IsAuthenticated,
                     LoginUrl = new MvcHtmlString(GetLoginUrl(currentContentLink)),
+                    CartUrl = new MvcHtmlString(cartUrl),
                     SearchActionUrl = new MvcHtmlString(EPiServer.Web.Routing.UrlResolver.Current.GetUrl(startPage.SearchPageLink)),
                     IsInReadonlyMode = _databaseMode.DatabaseMode == DatabaseMode.ReadOnly
                 };
