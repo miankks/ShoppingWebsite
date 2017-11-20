@@ -1,6 +1,14 @@
 ﻿
-@model ShoppingCartViewModel
+@model ShoppingWebsite.Models.ViewModels.ShoppingCartViewModel
     
 <div>
     This is cart
+</div>
+<div>
+    @foreach (var item in Model.ShoppingCartPages)
+    {
+        
+        <h1>@item.Size</h1>
+        <h1>@item.NumberOfItems</h1>
+    }
 </div>

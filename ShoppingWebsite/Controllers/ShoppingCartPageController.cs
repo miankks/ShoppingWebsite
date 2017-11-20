@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using EPiServer;
 using EPiServer.Core;
@@ -21,14 +23,45 @@ namespace ShoppingWebsite.Controllers
         }
         public ActionResult Index(ShoppingCartPage currentPage)
         {
-            var categoryPages = _contentRepository.GetChildren<ShoppingCartPage>(currentPage.ContentLink).ToList();
-
-            var model = new ShoppingCartViewModel(currentPage)
+            //var categoryPages = _contentRepository.GetChildren<ShoppingCartPage>(currentPage.ContentLink).ToList();
+            //var model = new ShoppingCartViewModel(currentPage)
+            //{
+            //    ShoppingCartPages = categoryPages
+            //};
+            var cart = new ShoppingCartPage();
+            var shop = new ShoppingCartViewModel(currentPage);
+            HttpCookie cookies = Request.Cookies["ShoppingCart"];
+            if (cookies != null)
             {
-                ShoppingCartPages = categoryPages
+                cart.Size = cookies["SIZE"];
+                cart.NumberOfItems = cookies["Itemsquantity"];
+                Response.Write(cart.Size + "  " + cart.NumberOfItems);
+                return View(shop);
+            }
+            else
+            {
+                Response.Write("not found   ");
+                return Content("Not recieved");
+            }
+        }
+
+        [HttpPost]
+        public void Index(string dropdowntipo, int? price, string sizes, string userId)
+        {
+         
+            HttpCookie cookie = new HttpCookie("ShoppingCart")
+            {
+                Value = "Hello Cookie! CreatedOn: amount ordered:    " + dropdowntipo + " and size:   " +
+                        sizes + "        " + DateTime.Now.ToShortTimeString(),
+                Expires = DateTime.Now.AddDays(30),
+                ["SIZE"] = sizes,
+                ["Itemsquantity"] = dropdowntipo,
             };
 
-            return View(model);
+
+            this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+            Response.Redirect("Index");
+            //return Content(cookie.Value);
         }
     }
 }

@@ -21,9 +21,8 @@
     @if (Model != null)
     {
         @*<form method="post" action=".">*@
-    using (Html.BeginForm("Index", "ShoppingCategoryPage", FormMethod.Post))
+    using (Html.BeginForm("Index", "ShoppingCartPage", FormMethod.Post))
     {
-
         <div class="media span4">
             <div class="mediaImg">
                 @if (Model.CurrentPage.ProductImage != null)
@@ -33,11 +32,11 @@
                 else
                 {
                     <img id="myImg" src="~/Static/img/nopreviewavailable.png" alt="no Image available" />
-                        <div id="myModal" class="modal">
-                            <span class="close">&times;</span>
-                            <img class="modal-content" id="img01">
-                            <div id="caption"></div>
-                        </div>
+                    <div id="myModal" class="modal">
+                        <span class="close">&times;</span>
+                        <img class="modal-content" id="img01">
+                        <div id="caption"></div>
+                    </div>
                 }
                 @*<h3 @Html.EditAttributes(x => x.CurrentPage.ProductName)>@Html.PropertyFor(x => x.CurrentPage.ProductName)</h3>*@
                 <h3 @Html.EditAttributes(x => x.CurrentPage.ProductPriceFor)>Pris: @Html.PropertyFor(x => x.CurrentPage.ProductPriceFor) kr</h3>
@@ -47,64 +46,44 @@
                 <h5>Product alfanum Id: @Html.DisplayFor(x => x.CurrentPage.Id)</h5>
             </div>
         </div>
-            <div class="span4">
+        <div class="span4">
 
-                <span name="desc"> @Html.PropertyFor(x => x.CurrentPage.ProductDecscription)</span>
+            <span name="desc"> @Html.PropertyFor(x => x.CurrentPage.ProductDecscription)</span>
 
-                <br />
-                <h4>Välj storleken</h4>
-                <select id="size" name="sizes">
-                    <option value="Small">Small</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Large">Large</option>
-                </select>
-                @*@if (Model.CurrentPage.ProductContentArea != null)
+            <br />
+            <h4>Välj storleken</h4>
+            <select id="size" name="sizes">
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+            </select>
+            @*@if (Model.CurrentPage.ProductContentArea != null)
+                {
+                    foreach (var item in Model.CurrentPage.ProductContentArea.FilteredItems)
                     {
-                        foreach (var item in Model.CurrentPage.ProductContentArea.FilteredItems)
-                        {
-                            <option value="@item.ContentLink.ID">@item.ContentLink.ID</option>
-                        }
-                    }*@
+                        <option value="@item.ContentLink.ID">@item.ContentLink.ID</option>
+                    }
+                }*@
 
-                <h4>Välj kvantitet</h4>
-                <select id="dropdowntipo" name="dropdowntipo">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
+            <h4>Välj kvantitet</h4>
+            <select id="dropdowntipo" name="dropdowntipo">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
 
-                <input type="submit" class="btn btn-primary add" value="+ Läg till">
-            </div>
+            <input type="submit" class="btn btn-primary add" value="+ Läg till">
+        </div>
     }
     @*</form>*@
     }
 </div>
-@*<div class="col-xs-12 col-sm-6">
-        <label for="Color">@Html.Translate("/ProductPage/VariationSelection/Color")</label>
-        @Html.DropDownListFor(x => x.CurrentPage.Color, Model.CurrentPage.Colors)
-    </div>
-    <div class="col-xs-12 col-sm-6">
-        <label for="Size">@Html.Translate("/ProductPage/VariationSelection/Size")</label>
-        @Html.DropDownListFor(x => x.CurrentPage.Size, Model.CurrentPage.Sizes)
-    </div>*@
-<script>
-    var itemCount = 0;
 
-    $(".add").click(function () {
-        itemCount++;
-        $("#itemCount").html(itemCount).css("display", "block");
-    });
 
-    $(".clear").click(function () {
-        itemCount = 0;
-        $("#itemCount").html("").css("display", "none");
-        $("#cartItems").html("");
-    });
-</script>

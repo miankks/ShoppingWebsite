@@ -36,27 +36,5 @@ namespace ShoppingWebsite.Controllers
 
             return View(model);
         }
-
-        [HttpPost]
-        public ActionResult Index(string dropdowntipo, int? price, string sizes)
-        {
-            string all = dropdowntipo +" " +" "+ sizes +" has been recieved";
-            HttpCookie cookie =
-                new HttpCookie("Cookie")
-                {
-                    Value = "Hello Cookie! CreatedOn: amount ordered: <b>" +dropdowntipo +"</b> and size: <b>" + sizes +"</b> " + DateTime.Now.ToShortTimeString(),
-                    Expires = DateTime.Now.AddDays(90),
-                    Name = "ShoppingCart",
-                };
-            this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
-            return Content(cookie.Value);
-        }
-
-        //[HttpPost]
-        //public ActionResult Index(string hello)
-        //{
-        //    string a = hello;
-        //    return Content(a);
-        //}
     }
 }

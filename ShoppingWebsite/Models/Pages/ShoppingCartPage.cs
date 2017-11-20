@@ -42,10 +42,22 @@ namespace ShoppingWebsite.Models.Pages
         public virtual double TotalCartPrice { get; set; }
 
         [Display(
+            Name = "Cart total price",
+            GroupName = "Price for total objects in cart",
+            Order = 30)]
+        public virtual string Size { get; set; }
+
+        [Display(
             Name = "Cart Moms",
             GroupName = "Moms for all objects in cart",
-            Order = 20)]
+            Order = 40)]
         public virtual double CartMoms => TotalCartPrice * 0.25;
+
+        [Display(
+            Name = "Cart total price",
+            GroupName = "Price for total objects in cart",
+            Order = 30)]
+        public virtual string NumberOfItems { get; set; }
 
         [Display(
             Name = "Cart content area",
