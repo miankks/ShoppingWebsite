@@ -243,6 +243,7 @@
     <Compile Include="Business\Channels\WebChannel.cs" />
     <Compile Include="Business\ContentExtensions.cs" />
     <Compile Include="Business\ContentLocator.cs" />
+    <Compile Include="Business\CookiesStorage.cs" />
     <Compile Include="Business\EditorDescriptors\ContactPageSelectionFactory.cs" />
     <Compile Include="Business\EditorDescriptors\ContactPageSelector.cs" />
     <Compile Include="Business\EditorDescriptors\StringListEditorDescriptor.cs" />
@@ -461,7 +462,6 @@
     <Content Include="Views\ArticlePage\Index.cshtml" />
     <Content Include="Views\ShoppingCategoryPage\Index.cshtml" />
     <Content Include="Views\ShoppingPage\Index.cshtml" />
-    <Content Include="Views\ShoppingCategoryPage\Cart.cshtml" />
     <Content Include="Views\ShoppingCartPage\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

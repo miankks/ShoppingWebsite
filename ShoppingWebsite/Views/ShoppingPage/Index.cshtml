@@ -28,11 +28,6 @@
                     else
                     {
                         <img id="myImg" src="~/Static/img/nopreviewavailable.png" alt="no Image available" />
-                        <div id="myModal" class="modal">
-                            <span class="close">&times;</span>
-                            <img class="modal-content" id="img01">
-                            <div id="caption"></div>
-                        </div>
                     }
                     @*<h3 @Html.EditAttributes(x => x.CurrentPage.ProductName)>@Html.PropertyFor(x => x.CurrentPage.ProductName)</h3>*@
                     <h3 @Html.EditAttributes(x => x.CurrentPage.ProductPriceFor)>Pris: @Html.PropertyFor(x => x.CurrentPage.ProductPriceFor) kr</h3>

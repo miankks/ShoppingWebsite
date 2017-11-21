@@ -72,35 +72,6 @@ namespace ShoppingWebsite.Models.Pages
             Order = 50)]
         [CultureSpecific]
         public virtual ContentArea ProductContentArea { get; set; }
-
-        //[Display(
-        //    Name = "Product Color",
-        //    GroupName = SystemTabNames.Content,
-        //    Order = 60)]
-        //public virtual IList<SelectListItem> Colors { get; set; }
-
-        //[Display(
-        //    Name = "Product size",
-        //    GroupName = SystemTabNames.Content,
-        //    Order = 70)]
-        //public virtual IList<SelectListItem> Sizes { get; set; }
-
-        //[Display(
-        //    Name = "Product color string",
-        //    GroupName = SystemTabNames.Content,
-        //    Order = 80)]
-        //public virtual string Color { get; set; }
-
-        //[Display(
-        //    Name = "Product size string",
-        //    GroupName = SystemTabNames.Content,
-        //    Order = 80)]
-        //public virtual string Size { get; set; }
-
-        //[Display(
-        //    Name = "Available?",
-        //    GroupName = SystemTabNames.Content,
-        //    Order = 80)]
-        //public virtual bool IsAvailable { get; set; }
+        
     }
 }

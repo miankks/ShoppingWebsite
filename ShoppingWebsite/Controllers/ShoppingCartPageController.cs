@@ -16,12 +16,6 @@ namespace ShoppingWebsite.Controllers
     public class ShoppingCartPageController : PageController<ShoppingCartPage>
     {
       
-        //private readonly IContentRepository _contentRepository;
-
-        //public ShoppingCartPageController(IContentRepository contentRepository)
-        //{
-        //    this._contentRepository = contentRepository;
-        //}
         public ActionResult Index(ShoppingCartPage currentPage)
         {
             var vm = new ShoppingCartViewModel(currentPage);
@@ -37,23 +31,18 @@ namespace ShoppingWebsite.Controllers
                 vm.ProductIdsInCookie = new List<string>();
                 vm.ProductIdsInCookie.Add(cart.NumberOfItems);
                 vm.ProductIdsInCookie.Add(cart.Size);
-
-                //Response.Write(cart.Size + "  " + cart.NumberOfItems);
-                //return Content(cart.Size, cart.NumberOfItems);
             }
 
             return View(vm);
         }
 
         [HttpPost]
-        public ActionResult Index(ShoppingCartPage currentPage, string numberOfItems, int? price, string sizes, string userId, string desc)
+        public ActionResult Index(ShoppingCartPage currentPage, string numberOfItems, string sizes)
         {
             var vm = new ShoppingCartViewModel(currentPage);
 
             HttpCookie cookie = new HttpCookie("ShoppingCart")
             {
-                //Value = "Hello Cookie! CreatedOn: amount ordered:    " + numberOfItems + " and size:   " +
-                //        sizes + "        " + DateTime.Now.ToShortTimeString(),
                 Expires = DateTime.Now.AddDays(30),
                 ["SIZE"] = sizes,
                 ["Itemsquantity"] = numberOfItems,
@@ -61,8 +50,12 @@ namespace ShoppingWebsite.Controllers
 
             this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
 
-            vm.ProductIdsInCookie = new List<string>();
-            vm.ProductIdsInCookie.Add(numberOfItems);
+            vm.ProductIdsInCookie = new List<string>
+            {
+                numberOfItems,
+                sizes
+            };
+
 
             return View(vm);
         }
