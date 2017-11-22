@@ -8,6 +8,7 @@ using EPiServer.Core;
 using EPiServer.Framework.DataAnnotations;
 using EPiServer.Web.Mvc;
 using EPiServer.Web.PageExtensions;
+using ShoppingWebsite.Business;
 using ShoppingWebsite.Models.Pages;
 using ShoppingWebsite.Models.ViewModels;
 
@@ -26,7 +27,7 @@ namespace ShoppingWebsite.Controllers
             if (cookies != null)
             {
                 cart.Size = cookies["SIZE"];
-                cart.NumberOfItems = cookies["Itemsquantity"];
+                cart.NumberOfItems = cookies["Quantity"];
 
                 vm.ProductIdsInCookie = new List<string>();
                 vm.ProductIdsInCookie.Add(cart.NumberOfItems);
@@ -40,15 +41,14 @@ namespace ShoppingWebsite.Controllers
         public ActionResult Index(ShoppingCartPage currentPage, string numberOfItems, string sizes)
         {
             var vm = new ShoppingCartViewModel(currentPage);
-
+            var productCookie = new CookiesHelper();
             HttpCookie cookie = new HttpCookie("ShoppingCart")
             {
                 Expires = DateTime.Now.AddDays(30),
                 ["SIZE"] = sizes,
-                ["Itemsquantity"] = numberOfItems,
+                ["Quantity"] = numberOfItems,
             };
-
-            this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+            productCookie.GetCookies(cookie.Name, cookie["Quantity"], cookie["Size"]);
 
             vm.ProductIdsInCookie = new List<string>
             {
