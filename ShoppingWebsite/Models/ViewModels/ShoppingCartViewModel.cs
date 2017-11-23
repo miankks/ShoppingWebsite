@@ -19,6 +19,7 @@ namespace ShoppingWebsite.Models.ViewModels
 
         public List<CartItem> ShoppingPagesInCart { get; set; }
 
+        public List<ShoppingCartPage> ShoppingCartPages { get; set; }
         public class CartItem
         {
             public ShoppingPage ShoppingPage { get; set; }

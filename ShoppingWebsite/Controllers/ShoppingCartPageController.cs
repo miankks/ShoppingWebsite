@@ -16,10 +16,18 @@ namespace ShoppingWebsite.Controllers
 {
     public class ShoppingCartPageController : PageController<ShoppingCartPage>
     {
-      
+        private readonly IContentRepository _contentRepository;
+
+        public ShoppingCartPageController(IContentRepository contentRepository)
+        {
+            this._contentRepository = contentRepository;
+        }
+
         public ActionResult Index(ShoppingCartPage currentPage)
         {
+            var cartPages = _contentRepository.GetChildren<ShoppingCartPage>(currentPage.ContentLink).ToList();
             var vm = new ShoppingCartViewModel(currentPage);
+            vm.ShoppingCartPages = cartPages;
 
             var cart = new ShoppingCartPage();
             HttpCookie cookies = Request.Cookies["ShoppingCart"];
@@ -38,9 +46,14 @@ namespace ShoppingWebsite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(ShoppingCartPage currentPage, string numberOfItems, string sizes)
+        public ActionResult Index(ShoppingCartPage currentPage, string numberOfItems, string sizes, ShoppingCartViewModel.CartItem item)
         {
+            var cartPages = _contentRepository.GetChildren<ShoppingCartPage>(currentPage.ContentLink).ToList();
+            ShoppingPage page = loader.Get<IContent>(cartPages) as ShoppingPage;
+            item.CartItemTotal = page.ProductPriceFor;
             var vm = new ShoppingCartViewModel(currentPage);
+            vm.ShoppingCartPages = cartPages;
+
             var productCookie = new CookiesHelper();
             HttpCookie cookie = new HttpCookie("ShoppingCart")
             {
